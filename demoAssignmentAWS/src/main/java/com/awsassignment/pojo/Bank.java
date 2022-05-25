@@ -6,18 +6,15 @@ public class Bank {
 	@Id
 	int customerID;
 	int branchID,accountID;
-	
 	public Bank() {
 	
 	}
-
 	public Bank(int customerID, int branchID, int accountID) {
 		super();
 		this.customerID = customerID;
 		this.branchID = branchID;
 		this.accountID = accountID;
 	}
-
 	public int getCustomerID() {
 		return customerID;
 	}
