@@ -5,13 +5,16 @@ import com.awsassignment.pojo.Bank;
 import com.awsassignment.repository.BankRepository;
 @Service
 public class BankDaoImpl implements BankDao{
-	private BankRepository bankrepo;
 	@Autowired
-	public BankDaoImpl(BankRepository bankrepo) {
+	private BankRepository bankrepo;
+	public BankRepository getBankrepo() {
+		return bankrepo;
+	}
+	public void setBankrepo(BankRepository bankrepo) {
 		this.bankrepo = bankrepo;
 	}
-	@Override
 	public Bank saveBankdatails(Bank bank) {
+		System.out.println("i am in Bankimpl"+bank);
 		return   bankrepo.save(bank);
 	}
 }

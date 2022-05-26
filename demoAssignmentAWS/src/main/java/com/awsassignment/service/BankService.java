@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -18,14 +17,17 @@ import com.awsassignment.dao.BankDao;
 import com.awsassignment.pojo.Bank;
 @Component
 public class BankService implements RequestHandler<Bank ,String>{
+	@Autowired
 	private BankDao bankdao;
 	AmazonS3 amazons3;
 	@Autowired
 	private Bank bank;
-	@Value("${bucketname}")
-	String bucketname;
-	@Autowired
-	public BankService(BankDao bankdao) {
+	@Value("${spring.bucket.name}")
+	private String bucketname;
+	public BankDao getBankdao() {
+		return bankdao;
+	}
+	public void setBankdao(BankDao bankdao) {
 		this.bankdao = bankdao;
 	}
 	@Autowired
