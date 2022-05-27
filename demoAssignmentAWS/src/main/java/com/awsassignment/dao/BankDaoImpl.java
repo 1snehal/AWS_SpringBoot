@@ -1,20 +1,20 @@
 package com.awsassignment.dao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+
 import com.awsassignment.pojo.Bank;
 import com.awsassignment.repository.BankRepository;
-@Service
-public class BankDaoImpl implements BankDao{
-	@Autowired
+@Component
+public class BankDaoImpl {
 	private BankRepository bankrepo;
-	public BankRepository getBankrepo() {
-		return bankrepo;
+	public BankDaoImpl() {
 	}
-	public void setBankrepo(BankRepository bankrepo) {
+	@Autowired
+	public BankDaoImpl(BankRepository bankrepo) {
 		this.bankrepo = bankrepo;
 	}
 	public Bank saveBankdatails(Bank bank) {
-		System.out.println("i am in Bankimpl"+bank);
 		return   bankrepo.save(bank);
 	}
 }

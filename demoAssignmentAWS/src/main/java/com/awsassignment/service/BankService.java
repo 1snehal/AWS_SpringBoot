@@ -13,37 +13,33 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
-import com.awsassignment.dao.BankDao;
+import com.awsassignment.dao.BankDaoImpl;
 import com.awsassignment.pojo.Bank;
 @Component
 public class BankService implements RequestHandler<Bank ,String>{
-	@Autowired
-	private BankDao bankdao;
+	private BankDaoImpl bankdaoimpl;
 	AmazonS3 amazons3;
 	@Autowired
 	private Bank bank;
 	@Value("${spring.bucket.name}")
-	private String bucketname;
-	public BankDao getBankdao() {
-		return bankdao;
-	}
-	public void setBankdao(BankDao bankdao) {
-		this.bankdao = bankdao;
+	String bucketname;
+	public BankService() {
+
 	}
 	@Autowired
 	public BankService(AmazonS3 amazons3) {
 		this.amazons3 = amazons3;
 	}
-	public BankService() {
-
+	@Autowired
+	public BankService(BankDaoImpl bankdaoimpl) {
+		this.bankdaoimpl = bankdaoimpl;
 	}
 	@Override
 	public String handleRequest(Bank input, Context context) {
 		List<Bank> banklist=amazons3client();
 		ListIterator<Bank> li=banklist.listIterator();
 		while(li.hasNext()) {
-			bank=li.next(); 
-			 bankdao.saveBankdatails(li.next());
+			 bankdaoimpl.saveBankdatails(li.next());
 		}
 		return "successful";
 	}

@@ -1,6 +1,0 @@
-com\awsassignment\configuration\BankConfiguration.class
-com\awsassignment\repository\BankRepository.class
-com\awsassignment\app\BankApp.class
-com\awsassignment\service\BankService.class
-com\awsassignment\pojo\Bank.class
-com\awsassignment\dao\BankDaoImpl.class
