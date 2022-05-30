@@ -12,23 +12,21 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
+import com.awsassignment.dao.BankDao;
 import com.awsassignment.dao.BankDaoImpl;
 import com.awsassignment.pojo.Bank;
 @Component
 public class BankService implements RequestHandler<Bank ,String>{
-	private  BankDaoImpl bankdaoimpl;
+	private  BankDao bankdao;
 	AmazonS3 amazons3;
 	@Autowired
 	private Bank bank;
 	public BankService() {
 
 	}
-	public BankDaoImpl getBankdaoimpl() {
-		return bankdaoimpl;
-	}
 	@Autowired
-	public void setBankdaoimpl(BankDaoImpl bankdaoimpl) {
-		this.bankdaoimpl = bankdaoimpl;
+	public BankService(BankDao bankdao) {
+		this.bankdao = bankdao;
 	}
 	@Autowired
 	public BankService(AmazonS3 amazons3) {
@@ -39,7 +37,7 @@ public class BankService implements RequestHandler<Bank ,String>{
 		List<Bank> banklist=amazons3client();
 		ListIterator<Bank> li=banklist.listIterator();
 		while(li.hasNext()) {
-			bankdaoimpl.saveBankdatails(li.next());
+			bankdao.saveBankdatails(li.next());
 		}
 		return "successful";
 	}

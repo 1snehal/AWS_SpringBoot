@@ -6,12 +6,12 @@ import com.awsassignment.repository.BankRepository;
 @Component
 public class BankDaoImpl implements BankDao{
 	private BankRepository bankrepo;
-	public BankRepository getBankrepo() {
-		return bankrepo;
-	}
 	@Autowired
-	public void setBankrepo(BankRepository bankrepo) {
+	public BankDaoImpl(BankRepository bankrepo) {
 		this.bankrepo = bankrepo;
+	}
+	public BankDaoImpl() {
+	
 	}
 	public Bank saveBankdatails(Bank bank) {
 		return  bankrepo.save(bank);

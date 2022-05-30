@@ -12,7 +12,7 @@ public class BankConfiguration {
 		return new Bank();
 	}
 	@Bean
-	public BankDaoImpl bankimplgenerate() {
+	public BankDao bankimplgenerate() {
 		return new BankDaoImpl();
 	}
 	@Bean
