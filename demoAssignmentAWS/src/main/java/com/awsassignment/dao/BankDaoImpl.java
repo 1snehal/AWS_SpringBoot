@@ -14,8 +14,6 @@ public class BankDaoImpl implements BankDao{
 		this.bankrepo = bankrepo;
 	}
 	public Bank saveBankdatails(Bank bank) {
-		System.out.println(bankrepo);
-		System.out.println("i am in bankimpl");
 		return  bankrepo.save(bank);
 	}
 }
