@@ -1,7 +1,9 @@
 package com.awsassignment.pojo;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 @Entity
+@Table
 public class Bank {
 	@Id
 	int customerID;

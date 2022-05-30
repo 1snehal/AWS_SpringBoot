@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -17,35 +16,36 @@ import com.awsassignment.dao.BankDaoImpl;
 import com.awsassignment.pojo.Bank;
 @Component
 public class BankService implements RequestHandler<Bank ,String>{
-	private BankDaoImpl bankdaoimpl;
+	private  BankDaoImpl bankdaoimpl;
 	AmazonS3 amazons3;
 	@Autowired
 	private Bank bank;
-	@Value("${spring.bucket.name}")
-	String bucketname;
 	public BankService() {
 
+	}
+	public BankDaoImpl getBankdaoimpl() {
+		return bankdaoimpl;
+	}
+	@Autowired
+	public void setBankdaoimpl(BankDaoImpl bankdaoimpl) {
+		this.bankdaoimpl = bankdaoimpl;
 	}
 	@Autowired
 	public BankService(AmazonS3 amazons3) {
 		this.amazons3 = amazons3;
-	}
-	@Autowired
-	public BankService(BankDaoImpl bankdaoimpl) {
-		this.bankdaoimpl = bankdaoimpl;
 	}
 	@Override
 	public String handleRequest(Bank input, Context context) {
 		List<Bank> banklist=amazons3client();
 		ListIterator<Bank> li=banklist.listIterator();
 		while(li.hasNext()) {
-			 bankdaoimpl.saveBankdatails(li.next());
+			bankdaoimpl.saveBankdatails(li.next());
 		}
 		return "successful";
 	}
 	public List<Bank> amazons3client() {
 		amazons3 = AmazonS3ClientBuilder.standard().build();
-		S3Object s=amazons3.getObject(bucketname,"Demo.csv");
+		S3Object s=amazons3.getObject("bankapplicationbuckets","Demo.csv");
 		BufferedReader ib=new BufferedReader(new InputStreamReader(s.getObjectContent()));
 		List<Bank> banklist=new ArrayList<>();
 		String line=null; 
