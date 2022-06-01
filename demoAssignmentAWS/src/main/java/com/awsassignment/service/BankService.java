@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -13,20 +14,16 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
 import com.awsassignment.dao.BankDao;
-import com.awsassignment.dao.BankDaoImpl;
 import com.awsassignment.pojo.Bank;
 @Component
 public class BankService implements RequestHandler<Bank ,String>{
+	@Autowired
 	private  BankDao bankdao;
-	AmazonS3 amazons3;
+	private AmazonS3 amazons3;
 	@Autowired
 	private Bank bank;
 	public BankService() {
 
-	}
-	@Autowired
-	public BankService(BankDao bankdao) {
-		this.bankdao = bankdao;
 	}
 	@Autowired
 	public BankService(AmazonS3 amazons3) {
@@ -52,10 +49,9 @@ public class BankService implements RequestHandler<Bank ,String>{
 			while((line=ib.readLine())!=null) { 
 				String [] data=line.split(","); 
 				for(int i=0;i<data.length;i++){
-					int cust=Integer.parseInt(data[0]);
-					int branch=Integer.parseInt(data[1]);
-					int account=Integer.parseInt(data[2]);
-					bank=new Bank(cust,branch,account);
+					int branch=Integer.parseInt(data[0]);
+					int account=Integer.parseInt(data[1]);
+					bank=new Bank(branch,account);
 				}
 				banklist.add(bank);
 			}

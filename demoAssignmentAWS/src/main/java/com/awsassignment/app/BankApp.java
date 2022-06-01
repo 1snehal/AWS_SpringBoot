@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
-@ComponentScan({"com.awsassignment.dao.BankDaoImpl"})
-@EnableJpaRepositories({"com.awsassignment.repository.BankRepository"})
+@ComponentScan(basePackages = {"com.awsassignment.dao","com.awsassignment.service"})
+@EntityScan("com.awsassignment.pojo")
+@EnableJpaRepositories(basePackages = {"com.awsassignment.repository"})
 public class BankApp {
 	public static void main(String[] args) {
 		SpringApplication.run(BankApp.class, args);

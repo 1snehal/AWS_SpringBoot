@@ -1,22 +1,24 @@
 package com.awsassignment.pojo;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
-@Table
+@Table(name="information")
 public class Bank {
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	int customerID;
 	int branchID,accountID;
 	public Bank() {
 	
 	}
-	public Bank(int customerID, int branchID, int accountID) {
-		super();
-		this.customerID = customerID;
+	public Bank(int branchID, int accountID) {
 		this.branchID = branchID;
 		this.accountID = accountID;
 	}
+	
 	public int getCustomerID() {
 		return customerID;
 	}
@@ -37,6 +39,6 @@ public class Bank {
 	}
 	@Override
 	public String toString() {
-		return "Bank [customerID=" + customerID + ", branchID=" + branchID + ", accountID=" + accountID + "]";
+		return "Bank [ branchID=" + branchID + ", accountID=" + accountID + "]";
 	}
 }
