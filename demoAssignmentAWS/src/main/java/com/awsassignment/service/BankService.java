@@ -25,12 +25,11 @@ public class BankService implements RequestHandler<Bank ,String>{
 	public BankDao getBankdao() {
 		return bankdao;
 	}
-
 	@Autowired
 	public BankService(BankDao bankdao) {
 		this.bankdao = bankdao;
 	}
-
+	@Autowired
 	public BankService(AmazonS3 amazons3) {
 		this.amazons3 = amazons3;
 	}
