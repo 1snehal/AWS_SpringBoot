@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Component;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -17,15 +16,21 @@ import com.awsassignment.dao.BankDao;
 import com.awsassignment.pojo.Bank;
 @Component
 public class BankService implements RequestHandler<Bank ,String>{
-	@Autowired
 	private  BankDao bankdao;
 	private AmazonS3 amazons3;
-	@Autowired
 	private Bank bank;
 	public BankService() {
 
 	}
+	public BankDao getBankdao() {
+		return bankdao;
+	}
+
 	@Autowired
+	public BankService(BankDao bankdao) {
+		this.bankdao = bankdao;
+	}
+
 	public BankService(AmazonS3 amazons3) {
 		this.amazons3 = amazons3;
 	}
