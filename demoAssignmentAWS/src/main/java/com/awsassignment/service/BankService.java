@@ -12,7 +12,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
-import com.awsassignment.app.dao.BankDao;
+import com.awsassignment.dao.BankDao;
 import com.awsassignment.pojo.Bank;
 @Component
 public class BankService implements RequestHandler<Bank ,String>{
