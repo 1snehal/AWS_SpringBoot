@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import com.awsassignment.pojo.Bank;
 @Configuration
-@ComponentScan(basePackages = {"com.awsassignment.app.dao","com.awsassignment.app.service"})
+@ComponentScan(basePackages = {"com.awsassignment.dao","com.awsassignment.service"})
 @EnableTransactionManagement
 @EnableAutoConfiguration
 @PropertySource("classpath:application.properties")
