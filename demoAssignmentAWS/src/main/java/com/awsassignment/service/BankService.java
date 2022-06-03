@@ -12,7 +12,7 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
-import com.awsassignment.dao.BankDao;
+import com.awsassignment.app.dao.BankDao;
 import com.awsassignment.pojo.Bank;
 @Component
 public class BankService implements RequestHandler<Bank ,String>{
@@ -21,9 +21,6 @@ public class BankService implements RequestHandler<Bank ,String>{
 	private Bank bank;
 	public BankService() {
 
-	}
-	public BankDao getBankdao() {
-		return bankdao;
 	}
 	@Autowired
 	public BankService(BankDao bankdao) {
@@ -60,7 +57,6 @@ public class BankService implements RequestHandler<Bank ,String>{
 				banklist.add(bank);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return banklist;
