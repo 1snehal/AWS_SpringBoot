@@ -4,6 +4,6 @@ import org.springframework.stereotype.Repository;
 
 import com.awsassignment.pojo.Bank;
 @Repository
-public interface BankRepository extends JpaRepository<Bank, Integer>{
+public interface BankRepository extends JpaRepository<Bank, String>{
 
 }

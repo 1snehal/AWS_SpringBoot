@@ -16,15 +16,12 @@ import com.awsassignment.dao.BankDao;
 import com.awsassignment.pojo.Bank;
 @Component
 public class BankService implements RequestHandler<Bank ,String>{
+	@Autowired
 	private  BankDao bankdao;
 	private AmazonS3 amazons3;
 	private Bank bank;
 	public BankService() {
 
-	}
-	@Autowired
-	public BankService(BankDao bankdao) {
-		this.bankdao = bankdao;
 	}
 	@Autowired
 	public BankService(AmazonS3 amazons3) {
@@ -50,9 +47,10 @@ public class BankService implements RequestHandler<Bank ,String>{
 			while((line=ib.readLine())!=null) { 
 				String [] data=line.split(","); 
 				for(int i=0;i<data.length;i++){
-					int branch=Integer.parseInt(data[0]);
-					int account=Integer.parseInt(data[1]);
-					bank=new Bank(branch,account);
+					String custid=data[0];
+					String branch=data[1];
+					int account=Integer.parseInt(data[2]);
+					bank=new Bank(custid,branch,account);
 				}
 				banklist.add(bank);
 			}

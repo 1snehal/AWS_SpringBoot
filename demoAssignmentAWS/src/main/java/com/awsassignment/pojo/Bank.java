@@ -8,27 +8,24 @@ import javax.persistence.Table;
 @Table(name="info")
 public class Bank {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	int customerID;
-	int branchID,accountID;
-	public Bank() {
-	
-	}
-	public Bank(int branchID, int accountID) {
+	String customerID;
+	String branchID;
+	int accountID;
+	public Bank(String customerID, String branchID, int accountID) {
+		this.customerID = customerID;
 		this.branchID = branchID;
 		this.accountID = accountID;
 	}
-	
-	public int getCustomerID() {
+	public String getCustomerID() {
 		return customerID;
 	}
-	public void setCustomerID(int customerID) {
+	public void setCustomerID(String customerID) {
 		this.customerID = customerID;
 	}
-	public int getBranchID() {
+	public String getBranchID() {
 		return branchID;
 	}
-	public void setBranchID(int branchID) {
+	public void setBranchID(String branchID) {
 		this.branchID = branchID;
 	}
 	public int getAccountID() {
@@ -37,8 +34,14 @@ public class Bank {
 	public void setAccountID(int accountID) {
 		this.accountID = accountID;
 	}
+	public Bank() {
+		
+	}
 	@Override
 	public String toString() {
-		return "Bank [ branchID=" + branchID + ", accountID=" + accountID + "]";
+		return "Bank [customerID=" + customerID + ", branchID=" + branchID + ", accountID=" + accountID + "]";
 	}
+	
+
+	
 }
