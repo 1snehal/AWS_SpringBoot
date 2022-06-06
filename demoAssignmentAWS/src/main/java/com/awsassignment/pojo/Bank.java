@@ -1,7 +1,5 @@
 package com.awsassignment.pojo;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 @Entity
@@ -35,13 +33,9 @@ public class Bank {
 		this.accountID = accountID;
 	}
 	public Bank() {
-		
 	}
 	@Override
 	public String toString() {
 		return "Bank [customerID=" + customerID + ", branchID=" + branchID + ", accountID=" + accountID + "]";
 	}
-	
-
-	
 }
