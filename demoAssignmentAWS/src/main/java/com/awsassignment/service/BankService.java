@@ -5,7 +5,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+
+import javax.annotation.PostConstruct;
+
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -14,24 +21,19 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
 import com.awsassignment.dao.BankDao;
 import com.awsassignment.pojo.Bank;
-@Component("bankservices")
+@Component
 public class BankService implements RequestHandler<Bank ,String>{
 	private BankDao bankdao;
 	private AmazonS3 amazons3;
 	private Bank bank;
 	public BankService() {
-	}
-	public BankDao getBankdao() {
-		return bankdao;
-	}
-	@Autowired
-	public BankService(AmazonS3 amazons3) {
-		this.amazons3 = amazons3;
+	
 	}
 	@Autowired
 	public BankService(BankDao bankdao) {
 		this.bankdao = bankdao;
 	}
+	@PostConstruct
 	@Override
 	public String handleRequest(Bank input, Context context) {
 		List<Bank> banklist=amazons3client();

@@ -1,7 +1,7 @@
 package com.awsassignment.dao;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 import com.awsassignment.pojo.Bank;
-@Repository
+@Component
 public interface BankDao {
-	Bank saveBankdatails(Bank banklist);
+	void saveBankdatails(Bank bank);
 }
